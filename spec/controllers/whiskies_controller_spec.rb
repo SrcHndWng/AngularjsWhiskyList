@@ -40,4 +40,28 @@ describe WhiskiesController do
     end
   end
 
+  describe "GET 'new'" do
+    before(:each) do
+      get :new
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+  end
+
+  describe "POST 'create'" do
+    before(:each) do
+      post :create, {'name' => 'Jack Daniels', 'price' => '39.99'}
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "save success" do
+      whiskies = Whisky.all
+      whiskies.length.should == 1
+    end
+  end
 end

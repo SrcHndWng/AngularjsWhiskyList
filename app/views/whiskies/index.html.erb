@@ -1,4 +1,5 @@
 <h1>Whiskies#index</h1>
+<%= link_to "new whisky", new_whisky_path, :class => 'btn btn-mini' %>
 <div ng-controller="WhiskiesCtrl">
     <ul>
       <li ng-repeat="whisky in data">

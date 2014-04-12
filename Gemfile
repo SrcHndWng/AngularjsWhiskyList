@@ -52,4 +52,5 @@ gem "less-rails"
 
 group :development,:test do
   gem 'rspec-rails'
+  gem 'spork', '1.0.0rc3'
 end

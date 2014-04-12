@@ -1,6 +1,8 @@
 AngularjsWhiskyList::Application.routes.draw do
   root "whiskies#index"
   get "whiskies/list"
+  resources :whiskies
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
