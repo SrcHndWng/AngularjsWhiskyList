@@ -1,6 +1,7 @@
 AngularjsWhiskyList::Application.routes.draw do
   root "whiskies#index"
   get "whiskies/list"
+  get 'whiskies/:id/detail' => 'whiskies#detail'
   resources :whiskies
 
   # The priority is based upon order of creation: first created -> highest priority.

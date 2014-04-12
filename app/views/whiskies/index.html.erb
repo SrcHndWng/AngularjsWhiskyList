@@ -1,10 +1,10 @@
 <h1>Whiskies#index</h1>
 <%= link_to "new whisky", new_whisky_path, :class => 'btn btn-mini' %>
-<div ng-controller="WhiskiesCtrl">
-    <ul>
-      <li ng-repeat="whisky in data">
-        {{whisky.name}}
-        <p>${{whisky.price}}</p>
-      </li>
-    </ul>
-</div>
+<table ng-controller="WhiskiesCtrl" class="table">
+    <tr ng-repeat="whisky in data">
+        <td>{{whisky.name}}</td>
+        <td>${{whisky.price}}</td>
+        <td><a href="/whiskies/{{whisky.id}}/edit" class="btn btn-mini">Edit</a></td>
+        <td><button ng-click="Delete(whisky);" class="btn btn-mini">Delete</button></td>
+    </tr>
+</table>
