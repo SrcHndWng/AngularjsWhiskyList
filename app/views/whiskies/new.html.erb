@@ -1,6 +1,19 @@
 <h1>Whiskies#new</h1>
 <div ng-controller="WhiskiesNewCtrl">
-    <div>Name</div><div><input type="text" ng-model="name"></div>
-    <div>Price</div><div><input type="text" ng-model="price"></div>
-    <button ng-click='Create();' class="btn-primary">Create</button>
+    <form name="form">
+        <div>Name</div>
+        <div>
+          <input type="text" ng-model="name" name="name" required ng-maxlength="30">
+          <span class="text-error" ng-show="form.name.$error.required">※</span>
+          <span class="text-error" ng-show="form.name.$error.maxlength">This is to 30 characters.</span>
+        </div>
+        <div>Price</div>
+        <div>
+          <input type="text" ng-model="price" name="price" required ng-pattern="/^([1-9]\d*|0)(\.\d+)?$/">
+          <span class="text-error" ng-show="form.price.$error.required">※</span>
+          <span class="text-error" ng-show="form.price.$error.pattern">This is not a valid dollar.</span>
+        </div>
+        <button class="btn-primary" ng-show="!form.$invalid" ng-click='Create();' ng-disabled="form.$invalid">Create</button>
+        <button class="btn" ng-show="form.$invalid" ng-disabled="form.$invalid">Create</button>
+    </form>
 </div>

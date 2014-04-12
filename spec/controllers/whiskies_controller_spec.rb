@@ -116,5 +116,6 @@ describe WhiskiesController do
       whiskies = Whisky.all
       whiskies.length.should == 2
     end
+    
   end
 end
