@@ -6,7 +6,13 @@ var whiskiesListApp = angular.module('whiskiesListApp', []);
 whiskiesListApp.config(
     ["$httpProvider", 
         function($httpProvider) {
-            $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+            var meta = document.getElementsByTagName('meta');
+            for (var item in meta) {
+                if (meta[item].name == 'csrf-token') {
+                    $httpProvider.defaults.headers.common['X-CSRF-Token'] = meta[item].content;
+                    break;
+                }
+            }
         }
     ]
 );
