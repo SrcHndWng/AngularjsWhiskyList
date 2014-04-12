@@ -1,0 +1,12 @@
+== README
+
+=== About
+This is a CRUD Sample Appliction with Ruby on Rails, AngularJS.
+
+=== Environments
+
+* Ruby 2.1.0
+
+* Rails 4.0.2
+
+* AngularJS 1.2.12

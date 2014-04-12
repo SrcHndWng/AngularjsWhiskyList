@@ -1,0 +1,9 @@
+<h1>Whiskies#index</h1>
+<div ng-controller="WhiskiesCtrl">
+    <ul>
+      <li ng-repeat="whisky in data">
+        {{whisky.name}}
+        <p>${{whisky.price}}</p>
+      </li>
+    </ul>
+</div>
