@@ -28,8 +28,18 @@ class WhiskiesController < ApplicationController
     whisky = Whisky.find_by_id(params[:id])
     whisky.name = params[:name]
     whisky.price = params[:price]
-    whisky.save
-    render :nothing => true
+    result = whisky.save
+    if(result)
+      render :nothing => true
+    else
+      messages = []
+      whisky.errors.messages.each{|message|
+        message[1].each{|m|
+          messages.push(m)
+        }
+      }
+      render :json => {:messages => messages}
+    end
   end
 
   def destroy

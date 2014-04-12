@@ -43,7 +43,7 @@ whiskiesListApp.controller('WhiskiesNewCtrl', function ($scope, $http, $window) 
     }
 });
 
-whiskiesListApp.controller('WhiskiesEditCtrl', function ($scope, $http, $window) {
+whiskiesListApp.controller('WhiskiesEditCtrl', function ($scope, $http, $window, $element) {
     $http.get('detail').success(function(data) {
         $scope.data = data;
     }).error(function(data, status) {
@@ -53,7 +53,16 @@ whiskiesListApp.controller('WhiskiesEditCtrl', function ($scope, $http, $window)
     $scope.Update = function(){
         $http.put('/whiskies/' + $scope.data.id, {'name': $scope.data.name, 'price': $scope.data.price}
         ).success(function(data, status, headers, config) {
-            $window.location.href = '/';
+            if(data.messages == undefined){
+                $window.location.href = '/';
+            }else{
+                var msg = '';
+                for(var i = 0; i < data.messages.length; i++){
+                    msg += data.messages[i];
+                    msg += "\n";
+                }
+                alert(msg);
+            }
         }).error(function(data, status) {
             console.log('error:' + status);
         });

@@ -87,18 +87,49 @@ describe WhiskiesController do
   end
 
   describe "POST 'update'" do
-    before(:each) do
-      post :update, {'id' => 2, 'name' => 'Johnnie Walker Red', 'price' => '20.99'}
+    describe "success" do
+      before(:each) do
+        post :update, {'id' => 2, 'name' => 'Johnnie Walker Red', 'price' => '20.99'}
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "response is empty" do
+        body = response.body
+        body.strip.should eq('')
+      end
+
+      it "update success" do
+        data = Whisky.find_by_id(2)
+        data['name'].should eq('Johnnie Walker Red')
+        data['price'].should eq(20.99)
+      end
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
+    describe "model invalid" do
+      it "name is required" do
+        post :update, {'id' => 2, 'name' => '', 'price' => '20.99'}
 
-    it "update success" do
-      data = Whisky.find_by_id(2)
-      data['name'].should eq('Johnnie Walker Red')
-      data['price'].should eq(20.99)
+        data = JSON.parse(response.body)
+        data['messages'][0].should eq('name is required.')
+      end
+
+      it "price is required" do
+        post :update, {'id' => 2, 'name' => 'Johnnie Walker Red', 'price' => ''}
+
+        data = JSON.parse(response.body)
+        data['messages'][0].should eq('price is required.')
+      end
+
+      it "both name and price are required" do
+        post :update, {'id' => 2, 'name' => '', 'price' => ''}
+
+        data = JSON.parse(response.body)
+        data['messages'][0].should eq('name is required.')
+        data['messages'][1].should eq('price is required.')
+      end
     end
   end
 
